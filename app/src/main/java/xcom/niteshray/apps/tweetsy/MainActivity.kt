@@ -1,7 +1,6 @@
 package xcom.niteshray.apps.tweetsy
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -13,31 +12,29 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import xcom.niteshray.apps.tweetsy.api.TweetsApi
+import xcom.niteshray.apps.tweetsy.screens.Home
 import xcom.niteshray.apps.tweetsy.ui.theme.TweetsyTheme
+import xcom.niteshray.apps.tweetsy.viewModels.TweetViewModel
 import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
+
     @Inject
-    lateinit var tweetsApi : TweetsApi
+    lateinit var viewModel: TweetViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        GlobalScope.launch {
-            val reponse = tweetsApi.getTweets("Android")
-            Log.d("tweetsdata",reponse.body().toString())
-        }
+
         setContent {
             TweetsyTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+                    Home(
+                        modifier = Modifier.padding(innerPadding),
+                        viewModel
                     )
                 }
             }
