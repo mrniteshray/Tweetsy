@@ -1,9 +1,9 @@
 package xcom.niteshray.apps.tweetsy.screens
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -23,31 +23,31 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import xcom.niteshray.apps.tweetsy.R
 import xcom.niteshray.apps.tweetsy.viewModels.TweetViewModel
 
 @Composable
-fun Home(modifier: Modifier,categoryViewmodel: TweetViewModel) {
+fun Home(modifier: Modifier,categoryViewmodel: TweetViewModel,onClick : (category : String) -> Unit) {
     var category: State<List<String>> = categoryViewmodel.category.collectAsState()
     LazyVerticalGrid(columns = GridCells.Fixed(2),
         contentPadding = PaddingValues(8.dp),
-        modifier = modifier
+        modifier = modifier.fillMaxSize()
     ) {
         items(category.value.distinct()){
-            CategoryItem(it)
+            CategoryItem(it,modifier = Modifier.clickable {
+                onClick(it)
+            })
         }
     }
 
 }
 
 @Composable
-fun CategoryItem(category : String) {
+fun CategoryItem(category: String, modifier: Modifier) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .padding(16.dp)
             .size(160.dp)
             .clip(RoundedCornerShape(16.dp))

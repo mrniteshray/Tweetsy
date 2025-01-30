@@ -24,10 +24,10 @@ class TweetRepo @Inject constructor(val tweetspi : TweetsApi) {
         }
     }
 
-    suspend fun fetchTweets(category : String){
-            val response = tweetspi.getTweets(category)
+    suspend fun fetchTweets(){
+            val response = tweetspi.getTweets()
             if (response.isSuccessful && response.body() != null){
-                _tweets.emit(response.body()!!)
+                _tweets.emit(response.body()!!.tweets)
             }
 
     }

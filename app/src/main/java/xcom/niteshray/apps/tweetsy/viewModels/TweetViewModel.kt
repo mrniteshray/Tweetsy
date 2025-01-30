@@ -19,7 +19,7 @@ class TweetViewModel @Inject constructor(val repo: TweetRepo) : ViewModel() {
 
     init {
         viewModelScope.launch {
-            repo.fetchTweets("Android")
+            repo.fetchTweets()
             repo.fetchCategory()
         }
     }
