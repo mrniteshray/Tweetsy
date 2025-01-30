@@ -16,7 +16,7 @@
 - **Dependency Injection:** Hilt
 - **Networking:** Retrofit
 - **State Management:** StateFlow / LiveData
-- 
+
 ---
 Made with ❤️ by [Nitesh Ray](https://github.com/mrniteshray/)
 
