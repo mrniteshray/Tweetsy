@@ -25,12 +25,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import xcom.niteshray.apps.tweetsy.R
 import xcom.niteshray.apps.tweetsy.viewModels.TweetViewModel
 
 @Composable
-fun Home(modifier: Modifier,categoryViewmodel: TweetViewModel,onClick : (category : String) -> Unit) {
-    var category: State<List<String>> = categoryViewmodel.category.collectAsState()
+fun Home(modifier: Modifier,onClick : (category : String) -> Unit) {
+    val categoryViewModel : TweetViewModel = hiltViewModel()
+    var category: State<List<String>> = categoryViewModel.category.collectAsState()
     LazyVerticalGrid(columns = GridCells.Fixed(2),
         contentPadding = PaddingValues(8.dp),
         modifier = modifier.fillMaxSize()
@@ -53,14 +55,44 @@ fun CategoryItem(category: String, modifier: Modifier) {
             .clip(RoundedCornerShape(16.dp))
             .rotate(180F)
             .paint(painterResource(R.drawable.stacked_waves_haikei),
-                contentScale = ContentScale.Crop)
-        ,
+                contentScale = ContentScale.Crop),
         contentAlignment = Alignment.TopCenter
     ){
-       Text(text = category, modifier = Modifier.padding(0.dp,20.dp).rotate(180F),
+       Text(text = category, modifier = Modifier
+           .padding(0.dp, 20.dp)
+           .rotate(180F),
            style = MaterialTheme.typography.bodyLarge,
            fontSize = 18.sp,
            color = Color.Black
        )
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

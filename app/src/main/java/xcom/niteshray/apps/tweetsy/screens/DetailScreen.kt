@@ -1,7 +1,6 @@
 package xcom.niteshray.apps.tweetsy.screens
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -15,14 +14,15 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import xcom.niteshray.apps.tweetsy.models.Tweets
 import xcom.niteshray.apps.tweetsy.viewModels.TweetViewModel
 
 @Composable
-fun DetailScreen(modifier: Modifier,viewmodel : TweetViewModel,category : String) {
+fun DetailScreen(modifier: Modifier,category : String) {
+    val viewmodel : TweetViewModel = hiltViewModel()
     val tweetlist: State<List<Tweets>> = viewmodel.tweets.collectAsState()
     LazyColumn(
         modifier = modifier
